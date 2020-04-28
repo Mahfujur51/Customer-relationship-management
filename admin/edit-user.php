@@ -6,12 +6,12 @@ include("dbconnection.php");
 if(isset($_POST['update']))
 {
 $name=$_POST['name'];
-$altemail=$_POST['altemail'];
-$contact=$_POST['contact'];
+
+$mobile=$_POST['mobile'];
 $address=$_POST['address'];
 $gender=$_POST['gender'];
 $userid=$_GET['id'];
-	$ret=mysqli_query($con,"update user set name='$name', alt_email='$altemail',mobile='$contact',gender='$gender',address='$address' where id='$userid'");
+	$ret=mysqli_query($con,"update tbl_user set name='$name','mobile='$mobile',gender='$gender',address='$address' where id='$userid'");
 	if($ret)
 	{
 	echo "<script>alert('Data Updated');</script>";	
@@ -64,7 +64,7 @@ $userid=$_GET['id'];
     <div class="clearfix"></div>
     <div class="content">  
 		<div class="page-title">
-         <?php $rt=mysqli_query($con,"select * from user where id='".$_GET['id']."'");
+         <?php $rt=mysqli_query($con,"select * from tbl_user where id='".$_GET['id']."'");
 			  while($rw=mysqli_fetch_array($rt))
 			  {?>	
 			<h3><?php echo $rw['name'];?>'s Profile</h3>	
@@ -80,18 +80,21 @@ $userid=$_GET['id'];
     <td height="42">Primary Email</td>
     <td><input type="text" name="email" id="email" value="<?php echo $rw['email'];?>" class="form-control" readonly></td>
   </tr>
-  <tr>
-    <td height="42">Alt Email</td>
-    <td><input type="text" name="altemail" id="altemail" value="<?php echo $rw['alt_email'];?>" class="form-control"></td>
-  </tr>
+  
   <tr>
     <td height="42">Contact no.</td>
-    <td><input type="text" name="contact" id="contact" value="<?php echo $rw['mobile'];?>" class="form-control"></td>
+    <td><input type="text" name="mobile" id="contact" value="<?php echo $rw['mobile'];?>" class="form-control"></td>
   </tr>
   <tr>
     <td height="42">Gender</td>
     <td><select name="gender" class="form-control">
-    <option value="<?php echo $rw['gender'];?>"><?php echo $rw['gender'];?></option>
+    <option value="<?php echo $rw['gender'];?>">
+     <?php if ($rw['gender']=='m') { 
+      echo "Male";
+     }else{
+      echo "Female";
+     } ?>
+    </option>
     <option value="Male">Male</option>
     <option value="Female">Female</option>
     <option value="Other">Other</option>
@@ -99,14 +102,7 @@ $userid=$_GET['id'];
     
     </td>
   </tr>
-  <tr>
-    <td height="42">User Image</td>
-<?php if($rw['user_image']==""){?>
-<td><img src="../images/noimages.png" width="120" height="100"  style="border:solid 1px #000000;" title="No Image available" /></td>
-<?php } else { ?>
-    <td><img src="../userimages/<?php echo $rw['user_image'];?>" width="120" height="80"  style="border:solid 1px #000000;" /></td>
-  <?php } ?>
-  </tr>
+ 
 
   <tr>
     <td height="42">Address</td>

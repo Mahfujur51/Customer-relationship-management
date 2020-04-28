@@ -6,22 +6,25 @@ check_login();
 include("dbconnection.php");
 if(isset($_POST['change']))
 {
-  $oldpas=$_POST['oldpass'];
-  $adminid=$_SESSION['id'];
-  $newpassword=$_POST['newpass'];
- $sql=mysqli_query($con,"SELECT password FROM  admin where password='$oldpas' && id='$adminid'");
-$num=mysqli_fetch_array($sql);
-if($num>0)
-{
- $con=mysqli_query($con,"update  admin set password='$newpassword' where id='$adminid'");
-$_SESSION['msg1']="Password Changed Successfully !!";
-//header('location:user.php');
-}
-else
-{
-$_SESSION['msg1']="Old Password not match !!";
-}
-}
+  $password=$_POST['password'];
+  $id=$_SESSION['id'];
+  $newpass=$_POST['newpass'];
+  $sql="SELECT * FROM tbl_admin WHERE password='$password' AND id='$id'";
+  $query=mysqli_query($con,$sql);
+  $num=mysqli_num_rows($query);
+  if ($num>0) {
+    $upsql="UPDATE tbl_admin SET password='$newpass' WHERE id='$id'";
+    $upqery=mysqli_query($con,$upsql);
+    if ($upqery) {
+      echo "<script>alert('password Change Successfully!!')</script>";
+    }else{
+      echo "<script>alert('Password Not changed Successfully')</script>";
+    }
+  }else{
+     echo "<script>alert('old password does not match!!')</script>";
+
+  }
+ }
 ?>
 
 <!DOCTYPE html>
@@ -46,37 +49,8 @@ $_SESSION['msg1']="Old Password not match !!";
 <script language="javascript" type="text/javascript">
 function valid()
 {
-if(document.form1.oldpass.value=="")
-{
-alert(" Old Password Field Empty !!");
-document.form1.oldpass.focus();
-return false;
-}
-else if(document.form1.newpass.value=="")
-{
-alert(" New Password Field Empty !!");
-document.form1.newpass.focus();
-return false;
-}
-else if(document.form1.confirmpassword.value=="")
-{
-alert(" Re-Type Password Field Empty !!");
-document.form1.confirmpassword.focus();
-return false;
-}
-else if(document.form1.newpass.value.length<6)
-{
-alert(" Password Field length must be atleast of 6 characters !!");
-document.form1.newpass.focus();
-return false;
-}
-else if(document.form1.confirmpassword.value.length<6)
-{
-alert(" Re-Type Password Field less than 6 characters !!");
-document.form1.confirmpassword.focus();
-return false;
-}
-else if(document.form1.newpass.value!= document.form1.confirmpassword.value)
+
+if(document.form1.newpass.value!= document.form1.confirmpassword.value)
 {
 alert("Password and Re-Type Password Field do not match  !!");
 document.form1.newpass.focus();
@@ -127,7 +101,7 @@ return true;
                                         <div class="col-md-6 col-xs-12">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><span class="fa fa-unlock-alt"></span></span>
-                                                <input type="password" name="oldpass" id="oldpass" value="" class="form-control"/>
+                                                <input type="password" name="password" id="oldpass" value="" class="form-control"/>
                                             </div>            
                                         
                                         </div>

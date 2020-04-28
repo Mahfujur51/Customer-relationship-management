@@ -3,7 +3,7 @@
     <!-- BEGIN MINI-PROFILE -->
     <div class="page-sidebar-wrapper scrollbar-dynamic" id="main-menu-wrapper">
       <div class="user-info-wrapper">
-        <div class="profile-wrapper"> <img src="images/admin.ico"  alt="" data-src="images/admin.ico" data-src-retina="images/admin.ico" width="69" height="69" /> </div>
+        <div class="profile-wrapper"> <img src="../userimages/user.jpg"  alt="" data-src="../userimages/user.jpg" data-src-retina="../userimages/user.jpg" width="69" height="69" /> </div>
         <div class="user-info">
           <div class="greeting">Welcome</div>
           <div class="username">Admin</div>

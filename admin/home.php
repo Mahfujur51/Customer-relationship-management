@@ -1,4 +1,5 @@
 <?php 
+error_reporting(0);
 session_start();
 include("dbconnection.php");
 include("checklogin.php");
@@ -69,8 +70,10 @@ check_login();
                 <div class="tiles-title text-black">Overall Visitors </div>
 			         <div class="widget-stats">
                       <div class="wrapper transparent"> 
-                      <?php $ov=mysqli_query($con,"select * from usercheck");
-					  $num=mysqli_num_rows($ov);
+                      <?php 
+                       $sql="SELECT * FROM tbl_usercheek";
+                       $query=mysqli_query($con,$sql);
+                       $num=mysqli_num_rows($query)
 					  ?>
 						<span class="item-title">Overall Visitors</span> <span class="item-count animate-number semi-bold" data-value="<?php echo $num;?>" data-animation-duration="700">0</span>
 					  </div>
@@ -80,15 +83,17 @@ check_login();
                     <div class="widget-stats ">
                       <div class="wrapper last"> 
                         <?php
-					   $tdate=date("Y/m/d");
+					   $tdate  =date("Y/m/d");
+					   $sql2   ="SELECT * FROM tbl_usercheek WHERE logindate='$tdate'";
+					   $query2 =mysqli_query($con,$sql2);
+					   $num2   =mysqli_num_rows($query2);
+
 					  
-					    $tv1=mysqli_query($con,"select * from usercheck where logindate='$tdate'");
-					  $num11=mysqli_num_rows($tv1);
 					  ?>
 									
 									
 						
-						<span class="item-title">Today</span> <span class="item-count animate-number semi-bold" data-value="<?php echo $num11;?>" data-animation-duration="700">0</span> <?php									
+						<span class="item-title">Today</span> <span class="item-count animate-number semi-bold" data-value="<?php echo $num2;?>" data-animation-duration="700">0</span> <?php									
 									
 									?>
 					 </div>
@@ -107,18 +112,18 @@ check_login();
                 <div class="tiles-title text-black">Registered Users  </div>
 			         <div class="widget-stats">
                       <div class="wrapper transparent">
-                      <?php $rt=mysqli_query($con,"select * from user");
+                      <?php 
+
+
+                      $rt=mysqli_query($con,"select * from tbl_user");
 					  $rw=mysqli_num_rows($rt);?> 
 						<span class="item-title">Registered Users</span> <span class="item-count animate-number semi-bold" data-value="<?php echo $rw;?>" data-     animation-duration="700">0</span>
 					  </div>
                     </div>
                     <div class="widget-stats ">
                       <div class="wrapper last"> 
-                      <?php 
-					  $utd=date('Y-m-d');
-					  $rt1=mysqli_query($con,"select * from user where posting_date='$utd'");
-					  $rw1=mysqli_num_rows($rt1);?>
-						<span class="item-title">Today's</span> <span class="item-count animate-number semi-bold" data-value="<?php echo $rw1;?>" data-animation-duration="700">0</span> 
+                      
+						<span class="item-title">Today's</span> <span class="item-count animate-number semi-bold" data-value="0" data-animation-duration="700">0</span> 
 					 </div>
                     </div>
 			  </div>			
@@ -132,7 +137,7 @@ check_login();
 			         <div class="widget-stats">
                       <div class="wrapper transparent"> 
                       <?php
-                      $qr=mysqli_query($con,"select * from prequest");
+                      $qr=mysqli_query($con,"SELECT * FROM tbl_prequest");
 					  $oq=mysqli_num_rows($qr);
 					  ?>
 						<span class="item-title">Overall Quotes</span> <span class="item-count animate-number semi-bold" data-value="<?php echo $oq?>" data-animation-duration="700">0</span>
@@ -141,7 +146,7 @@ check_login();
                     <div class="widget-stats">
                       <div class="wrapper transparent">
                        <?php
-                      $qr1=mysqli_query($con,"select * from prequest where status='0'");
+                      $qr1=mysqli_query($con,"select * from tbl_prequest where status='0'");
 					  $oq1=mysqli_num_rows($qr1);
 					  ?>
 						<span class="item-title">New Quotes's</span> <span class="item-count animate-number semi-bold" data-value="<?php echo $oq1;?>" data-animation-duration="700">0</span> 
@@ -150,7 +155,7 @@ check_login();
                     <div class="widget-stats ">
                       <div class="wrapper last"> 
                        <?php
-                      $qr2=mysqli_query($con,"select * from prequest where status='1'");
+                      $qr2=mysqli_query($con,"select * from tbl_prequest where status='1'");
 					  $oq2=mysqli_num_rows($qr2);
 					  ?>
 						<span class="item-title">In Progress</span> <span class="item-count animate-number semi-bold" data-value="<?php echo $oq2;?>" data-animation-duration="700">0</span> 
@@ -173,7 +178,7 @@ check_login();
                 <div class="tiles-title text-black">Overall Tickets </div>
 			         <div class="widget-stats">
                       <div class="wrapper transparent"> 
-                      <?php $vt=mysqli_query($con,"select * from ticket");
+                      <?php $vt=mysqli_query($con,"select * from tbl_ticket");
 					  $ovt=mysqli_num_rows($vt);
 					  ?>
 						<span class="item-title">All Tickets</span> <span class="item-count animate-number semi-bold" data-value="<?php echo $ovt;?>" data-animation-duration="700">0</span>
@@ -186,7 +191,7 @@ check_login();
                         <?php
 					   $tdate=date("Y/m/d");
 					  
-					    $otv=mysqli_query($con,"select * from ticket where status='Open'");
+					    $otv=mysqli_query($con,"select * from tbl_ticket where status='Open'");
 					  $otv1=mysqli_num_rows($otv);
 					  ?>
 									
@@ -253,7 +258,7 @@ check_login();
 									
 								}
 								//print_r($month_array);
-								$results = mysqli_query($con,"SELECT logindate FROM usercheck");
+								$results = mysqli_query($con,"SELECT logindate FROM tbl_usercheek");
 					                //$f2=mysql_num_rows($a2);
 									
 									if(mysqli_num_rows($results) >0)

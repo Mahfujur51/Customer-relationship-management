@@ -80,12 +80,15 @@ check_login();
                                                         <th>Full Name</th>
                                                         <th>Email ID </th>
                                                         <th>Contact No</th>
-                                                        <th>Registration Date</th>
+                                                       
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                <?php $ret=mysqli_query($con,"select * from user");
+                                                <?php
+
+
+                                                 $ret=mysqli_query($con,"select * from tbl_user");
 												$cnt=1;
 												while($row=mysqli_fetch_array($ret))
 												{
@@ -96,7 +99,7 @@ check_login();
                                                         <td><?php echo $row['name'];?></td>
                                                         <td><?php echo $row['email'];?></td>
                                                          <td><?php echo $row['mobile'];?></td>
-                                                          <td><?php echo $row['posting_date'];?></td>
+                                                       
                                                           <td>
                                                           <form name="abc" action="" method="post">
                                                            <a href="edit-user.php?id=<?php echo $row['id'];?>" class="btn btn-primary btn-xs btn-mini">View n Edit</a> 
