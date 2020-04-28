@@ -30,8 +30,16 @@ if(isset($_POST['submit']))
 	$other=$_POST['other'];
 	$query=$_POST['query'];
 	$pd=date('Y-m-d');
-mysqli_query($con,"insert into prequest(name,email,contactno,company,wdd,cms,seo,smo,swd,dwd,fwd,dr,whs,wm,ed,wta,opi,ld,da,osc,nd,others,query,posting_date) values('$name','$email','$contact','$company','$wdd','$cms','$seo','$smo','$swd','$dwd','$fwd','$dr','$whs','$wm','$ed','$wta','$opi','$ld','$dba','$osc','$nd','$other','$query','$pd')");
-$_SESSION['msg']="Query Send";
+
+     $result=mysqli_query($con,"insert into tbl_prequest(name,email,contact,company,wdd,cms,seo,smo,swd,dwd,fwd,dr,whs,wm,ed,wta,opi,ld,da,osc,nd,others,query,posting_date) values('$name','$email','$contact','$company','$wdd','$cms','$seo','$smo','$swd','$dwd','$fwd','$dr','$whs','$wm','$ed','$wta','$opi','$ld','$dba','$osc','$nd','$other','$query','$pd')");
+     if ($result) {
+         $_SESSION['msg']="Query Send";
+     } else
+     {
+         echo "<script>alert('somethig wrong')</script>";
+
+     }
+
 }
 ?>
 
