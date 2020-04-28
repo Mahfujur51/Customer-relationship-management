@@ -16,17 +16,20 @@ fclose($fp);
 $tid=$hits[0];
 $email=$_SESSION['login'];
 $subject=$_POST['subject'];
-$tt=$_POST['tasktype'];
+$task_type=$_POST['task_type'];
 $priority=$_POST['priority'];
-$ticket=$_POST['description'];
+$ticket=$_POST['ticket'];
 //$ticfile=$_FILES["tfile'"]["name"];
-$st="Open";
-$pdate=date('Y-m-d');
+$status="Open";
+$postig_date=date('Y-m-d');
 //move_uploaded_file($_FILES["tfile"]["tmp_name"],"ticketfiles/".$_FILES["tfile"]["name"]);
-$a=mysqli_query($con,"insert into ticket(ticket_id,email_id,subject,task_type,prioprity,ticket,status,posting_date)  values('$tid','$email','$subject','$tt','$priority','$ticket','$st','$pdate')");
-if($a)
+//
+$sql="INSERT INTO tbl_ticket (ticket_id,email,subject,task_type,priority,ticket,status,postig_date) VALUES('$tid','$email','$subject','$task_type','$priority','$ticket','$status','$postig_date')";
+$query=mysqli_query($con,$sql);
+
+if($query)
 {
-echo "<script>alert('Ticket Genrated');</script>";
+echo "<script>alert('Ticket Genrated')</script>";
 }
 }
 ?>
@@ -107,7 +110,7 @@ echo "<script>alert('Ticket Genrated');</script>";
 									 <div class="form-group">
                                         <label class="col-md-3 col-xs-12 control-label">Task Type</label>
                                         <div class="col-md-6 col-xs-12">                                                                                            
-                                            <select  name="tasktype" class="form-control select" required>
+                                            <select  name="task_type" class="form-control select" required>
                                                 <option> Select your Task Type</option>
                                                 <option value="billing">Billing</option>
                                                 <option value="ot1">Option 1</option>
@@ -134,7 +137,7 @@ echo "<script>alert('Ticket Genrated');</script>";
                                     <div class="form-group">
                                         <label class="col-md-3 col-xs-12 control-label">Description</label>
                                         <div class="col-md-6 col-xs-12">                                            
-                                            <textarea name="description" required class="form-control" rows="5"></textarea>
+                                            <textarea name="ticket" required class="form-control" rows="5"></textarea>
                                             
                                         </div>
                                     </div>

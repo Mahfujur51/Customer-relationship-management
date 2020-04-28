@@ -3,7 +3,7 @@
     <!-- BEGIN MINI-PROFILE -->
     <div class="page-sidebar-wrapper scrollbar-dynamic" id="main-menu-wrapper">
       <div class="user-info-wrapper">
-        <div class="profile-wrapper"> <img src="userimages/admin.ico"  alt="" data-src="userimages/admin.ico" data-src-retina="userimages/admin.ico" width="69" height="69" /> </div>
+        <div class="profile-wrapper"> <img src="userimages/user.jpg"  alt="" data-src="userimages/user.jpg" data-src-retina="userimages/user.jpg" width="69" height="69" /> </div>
         <div class="user-info">
           <div class="greeting" style="font-size:14px;">Welcome</div>
           <div class="username" style="font-size:12px;"><?php echo $_SESSION['name'];?></div>
