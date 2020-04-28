@@ -1,5 +1,5 @@
 <?php
-$con=mysqli_connect("localhost", "root", "", "crm");
+$con=mysqli_connect("localhost", "root", "", "crm_online");
 if(mysqli_connect_errno()){
 echo "Connection Fail".mysqli_connect_error();
 }
