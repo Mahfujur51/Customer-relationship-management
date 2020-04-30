@@ -77,22 +77,32 @@ check_login();
                   </tr>
                 </thead>
                 <tbody>
-                <?php $ret=mysqli_query($con,"select * from usercheck ");
-				$cnt=1;
-				while($row=mysqli_fetch_array($ret))
-				{?>
+                <?php 
+                $sql="SELECT * FROM tbl_usercheek";
+                $query=mysqli_query($con,$sql);
+                $num=mysqli_num_rows($query);
+                if ($num>0) {
+                  $cont=1;
+                  while ($result=mysqli_fetch_array($query)) {
+                    # code...
+         ?>
                   <tr >
-                    <td class="v-align-middle"><?php echo $row['user_id'];?></td>
-                    <td class="v-align-middle"><?php echo $row['username'];?></td>
-                               <td class="v-align-middle"><?php echo $row['email'];?></td>
-                               <td class="v-align-middle"><?php echo $row['logindate'];?> | <?php echo $row['logintime'];?> </td>
-                    <td class="v-align-middle"><span class="muted"><?php echo $row['ip'];?></span></td>
-                    <td><span class="muted"><?php echo $row['mac'];?></span></td>
-                    <td class="v-align-middle"><?php echo $row['city'];?>
+                    <td class="v-align-middle"><?php echo $result['user_id'];?></td>
+                    <td class="v-align-middle"><?php echo $result['username'];?></td>
+                               <td class="v-align-middle"><?php echo $result['email'];?></td>
+                               <td class="v-align-middle"><?php echo $result['logindate'];?> | <?php echo $result['logintime'];?> </td>
+                    <td class="v-align-middle"><span class="muted"><?php echo $result['ip'];?></span></td>
+                    <td><span class="muted"><?php echo $result['mac'];?></span></td>
+                    <td class="v-align-middle"><?php echo $result['city'];?>
                     </td>
-                      <td><?php echo $row['country'];?></td>
+                      <td><?php echo $result['country'];?></td>
                   </tr>
-                 <?php $cnt=$cnt+1; } ?>
+                 <?php  
+                 $cont++;                  
+                
+
+                  }
+                } ?>
                 </tbody>
               </table>
             </div>

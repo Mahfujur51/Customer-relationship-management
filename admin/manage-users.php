@@ -4,6 +4,20 @@ include("dbconnection.php");
 include("checklogin.php");
 check_login();
 ?>
+<?php 
+    if (isset($_GET['delid'])) {
+        $id=$_GET['delid'];
+        $dsql="DELETE  FROM tbl_user WHERE id='$id'";
+        $delquery=mysqli_query($con,$dsql);
+        if ($delquery) {
+            echo "<script style='color:red'>alert('Data Deleted Successfully!!')</script>";
+        }
+       
+    }
+
+
+
+ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -101,10 +115,10 @@ check_login();
                                                          <td><?php echo $row['mobile'];?></td>
                                                        
                                                           <td>
-                                                          <form name="abc" action="" method="post">
+                                                         
                                                            <a href="edit-user.php?id=<?php echo $row['id'];?>" class="btn btn-primary btn-xs btn-mini">View n Edit</a> 
-                                                           <button type="button" class="btn btn-danger btn-xs btn-mini">Delete </button>
-                                                           </form>
+                                                           <a type="button" href=" ?delid=<?php echo $row['id']; ?>"  onclick="alert('Are you sure to delete???')" class="btn btn-danger btn-xs btn-mini">Delete </a>
+                                                          
                                                           </td>
                                                     </tr>
                                                     <?php $cnt=$cnt+1; } ?>

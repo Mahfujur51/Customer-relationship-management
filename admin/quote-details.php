@@ -3,12 +3,15 @@ session_start();
 include("dbconnection.php");
 include("checklogin.php");
 check_login();
-if(isset($_POST['remark']))
-{
-	$msg=mysqli_query($con,"update prequest set remark='".$_POST['adminremark']."' where id='".$_GET['id']."'");
-	if($msg)
-	{
-	echo "<script>alert('Remark Updated');</script>";	
+if(isset($_POST['update']))
+{   
+	$id=$_GET['id'];
+
+	$remark=$_POST['remark'];
+	$upsql="UPDATE  tbl_prequest SET remark='$remark' WHERE id='$id'";
+	$upquery=mysqli_query($con,$upsql);
+	if ($upquery) {
+		echo "<script>alert('Remark Updated !!')</script>";
 	}
 }
 ?><!DOCTYPE html>
@@ -64,16 +67,20 @@ if(isset($_POST['remark']))
 		<h3>Quote Details</h3>	
 	</div>
  	<?php
-    $ret=mysqli_query($con,"select * from prequest where id='".$_GET['id']."'");
-	while($row=mysqli_fetch_array($ret))
-	{
-	
+ 	if (isset($_GET['id'])) {
+ 		$id=$_GET['id'];
+ 		$sql="SELECT * FROM tbl_prequest WHERE id='$id'";
+ 		$query=mysqli_query($con,$sql);
+ 		$num=mysqli_num_rows($query);
+ 		if ($num>0) {
+ 			while ($result=mysqli_fetch_array($query)) {
+ 		
 	?>
       			<div class="row">
 					<div class="col-md-12">
 						    <div class="grid simple vertical green">
 							<div class="grid-title no-border">
-								<h4><?php echo $row['name'];?>'s Quote <span class="semi-bold">Details</span></h4>
+								<h4><?php echo $result['name'];?>'s Quote <span class="semi-bold">Details</span></h4>
 								<div class="tools">
 									<a href="javascript:;" class="collapse"></a>
 									<a href="#grid-config" data-toggle="modal" class="config"></a>
@@ -85,45 +92,45 @@ if(isset($_POST['remark']))
 								<div class="row-fluid ">
 									    <address class="margin-bottom-20 margin-top-10">
 											<strong>Name</strong>:
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row['name'];?><br>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $result['name'];?><br>
                                             <strong>Email</strong>:
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row['email'];?><br>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $result['email'];?><br>
                                             <strong>Contact no.</strong>:
-											&nbsp;<?php echo $row['contactno'];?><br>
+											&nbsp;<?php echo $result['contact'];?><br>
 											<strong>Company</strong>:
-											&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row['company'];?><br>
+											&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $result['company'];?><br>
 										</address>	
                                         <address class="margin-bottom-20 margin-top-10">
 											<strong>Required Services</strong><br>
-											<?php echo $row['wdd'];?><br>
-                    <?php echo $row['cms'];?>
-                    <?php echo $row['seo'];?>
-                    <?php echo $row['smo'];?>
-                    <?php echo $row['swd'];?>
-                    <?php echo $row['dwd'];?>
-                    <?php echo $row['fwd'];?>
-                    <?php echo $row['dr'];?>
-					<?php echo $row['whs'];?>
-                    <?php echo $row['wm'];?>
-					<?php echo $row['ed'];?>
-					<?php echo $row['wta'];?>
-					<?php echo $row['opi'];?>
-					<?php echo $row['ld'];?>
-					<?php echo $row['da'];?>
-                    	<?php echo $row['osc'];?>
-                        	<?php echo $row['nd'];?>
-                            	<?php echo $row['others'];?>
+											<?php echo $result['wdd'];?><br>
+                    <?php echo $result['cms'];?>
+                    <?php echo $result['seo'];?>
+                    <?php echo $result['smo'];?>
+                    <?php echo $result['swd'];?>
+                    <?php echo $result['dwd'];?>
+                    <?php echo $result['fwd'];?>
+                    <?php echo $result['dr'];?>
+					<?php echo $result['whs'];?>
+                    <?php echo $result['wm'];?>
+					<?php echo $result['ed'];?>
+					<?php echo $result['wta'];?>
+					<?php echo $result['opi'];?>
+					<?php echo $result['ld'];?>
+					<?php echo $result['da'];?>
+                    	<?php echo $result['osc'];?>
+                        	<?php echo $result['nd'];?>
+                            	<?php echo $result['others'];?>
 											
 										</address>										 
 										<address>
 											<strong>Description</strong><br>
-										<?php echo $row['query'];?>
+										<?php echo $result['query'];?>
 										</address>
-                                        <form name="remark" action="" method="post" enctype="multipart/form-data">
+                                        <form name="remark" action="" method="post">
                                         <address>
 											<strong>Remark</strong><br>
-										<textarea name="adminremark" cols="70" rows="4"><?php echo $row['remark'];?></textarea><br /><br />
-                                        <input type="submit" name="remark" value="Submit" />
+										<textarea name="remark" cols="70" rows="4"><?php echo $result['remark'];?></textarea><br /><br />
+                                        <input type="submit" name="update"  />
 										</address>
                                         </form>
 								</div>
@@ -131,7 +138,7 @@ if(isset($_POST['remark']))
 						</div> 
 					</div>
 				</div>
-      			<?php } ?>
+      			<?php } } }?>
 				
 			
 				</div>					

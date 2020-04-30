@@ -106,8 +106,6 @@ return true;
                                         
                                         </div>
                                     </div>
-									
-									
 									  <div class="form-group">                                        
                                         <label class="col-md-3 col-xs-12 control-label">New Password</label>
                                         <div class="col-md-6 col-xs-12">
